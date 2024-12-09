@@ -5,7 +5,7 @@ import com.boompanupong.railwaymanagement.model.Ticket;
 import java.util.List;
 
 public interface TicketService {
-    List<Ticket> getAllTickets();
+    List<Ticket> getAllTicket();
     Ticket getTicketById();
-    Void createTicket();
+    Ticket createTicket();
 }

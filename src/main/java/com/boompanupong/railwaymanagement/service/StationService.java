@@ -5,7 +5,7 @@ import com.boompanupong.railwaymanagement.model.Station;
 import java.util.List;
 
 public interface StationService {
-    List<Station> getAllStations();
-    Station getStationById();
-    Void createStation();
+    List<Station> getAllStation();
+    Station getStationById(Long id);
+    Station createStation(Station station);
 }

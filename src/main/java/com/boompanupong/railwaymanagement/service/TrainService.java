@@ -5,7 +5,7 @@ import com.boompanupong.railwaymanagement.model.Train;
 import java.util.List;
 
 public interface TrainService {
-    List<Train> getAllTrains();
+    List<Train> getAllTrain();
     Train getTrainById();
-    Void createTrain();
+    Train createTrain();
 }

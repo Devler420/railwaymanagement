@@ -1,12 +1,15 @@
 package com.boompanupong.railwaymanagement.service;
 
 import com.boompanupong.railwaymanagement.model.Ticket;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TicketServiceImpl implements TicketService {
+
     @Override
-    public List<Ticket> getAllTickets() {
+    public List<Ticket> getAllTicket() {
         return null;
     }
 
@@ -16,7 +19,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Void createTicket() {
+    public Ticket createTicket() {
         return null;
     }
 }

@@ -1,12 +1,15 @@
 package com.boompanupong.railwaymanagement.service;
 
 import com.boompanupong.railwaymanagement.model.Train;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TrainServiceImpl implements TrainService {
+
     @Override
-    public List<Train> getAllTrains() {
+    public List<Train> getAllTrain() {
         return null;
     }
 
@@ -16,7 +19,7 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public Void createTrain() {
+    public Train createTrain() {
         return null;
     }
 }

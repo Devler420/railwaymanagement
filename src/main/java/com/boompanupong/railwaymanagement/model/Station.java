@@ -19,4 +19,5 @@ public class Station {
 
     @Column(name = "contact_information")
     private String contactInformation;
+
 }
