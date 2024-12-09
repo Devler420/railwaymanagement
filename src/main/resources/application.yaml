@@ -1,9 +1,17 @@
 spring:
   application:
     name: railwaymanagement
-  devtools:
-    add-properties: false
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/?user=root
-    username: railway_operator
-    password: temppassw0rd*
+    url: jdbc:h2:mem:mydb
+#    url: jdbc:h2:file:/data/railwaydemo
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console.enabled: true
+  #  datasource:
+  #    url: jdbc:mysql://127.0.0.1:3306/?user=root
+  #    username:
+  #    password:
