@@ -39,7 +39,7 @@ public class StationController {
         return new ResponseEntity<>(updateStation, HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteStationById(@PathVariable Long id) {
         stationService.deleteStationById(id);
     }

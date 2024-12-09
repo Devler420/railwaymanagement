@@ -23,7 +23,8 @@ public class StationServiceImpl implements StationService {
     @Override
     public Station getStationById(Long id) {
         Optional<Station> optionalStation = stationRepository.findById(id);
-        return optionalStation.orElseThrow(() -> new NotFoundException("Station Not Found"));
+        return optionalStation.orElseThrow(() ->
+                new NotFoundException("Station ID: " + id + " Not Found"));
     }
 
     @Override
@@ -34,7 +35,8 @@ public class StationServiceImpl implements StationService {
     @Override
     public Station updateStation(Station station) {
         Optional<Station> optionalStation = stationRepository.findById(station.getId());
-        Station stationToUpdate = optionalStation.orElseThrow(() -> new NotFoundException("Station Not Found"));
+        Station stationToUpdate = optionalStation.orElseThrow(() ->
+                new NotFoundException("Station ID: " + station.getId() + " Not Found"));
         stationToUpdate.setStationName(station.getStationName());
         stationToUpdate.setLocation(station.getLocation());
         stationToUpdate.setContactInformation(station.getContactInformation());
@@ -43,6 +45,11 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public void deleteStationById(Long id) {
-        stationRepository.deleteById(id);
+        Optional<Station> optionalStationToDelete = stationRepository.findById(id);
+        if (optionalStationToDelete.isPresent()) {
+            stationRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Station ID: " + id + " Not Found");
+        }
     }
 }
