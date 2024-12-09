@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: railwaymanagement
+  devtools:
+    add-properties: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/?user=root
+    username: railway_operator
+    password: temppassw0rd*
