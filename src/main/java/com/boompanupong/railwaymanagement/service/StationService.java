@@ -8,4 +8,6 @@ public interface StationService {
     List<Station> getAllStation();
     Station getStationById(Long id);
     Station createStation(Station station);
+    Station updateStation(Station station);
+    void deleteStationById(Long id);
 }

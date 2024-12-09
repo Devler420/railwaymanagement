@@ -30,7 +30,17 @@ public class StationController {
     @PostMapping
     public ResponseEntity<Station> createStation(@RequestBody Station station) {
         Station savedStation = stationService.createStation(station);
-        System.out.println(station.getStationName());
         return new ResponseEntity<>(savedStation, HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<Station> updateStation(@RequestBody Station station) {
+        Station updateStation = stationService.updateStation(station);
+        return new ResponseEntity<>(updateStation, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping
+    public void deleteStationById(@PathVariable Long id) {
+        stationService.deleteStationById(id);
     }
 }

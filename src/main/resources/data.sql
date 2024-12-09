@@ -5,6 +5,12 @@ CREATE TABLE station (
     contact_information VARCHAR(255)
 );
 
+--INSERT INTO station (station_name, location, contact_information) VALUES ('Mo Chit', 'Bangkok', '111');
+--INSERT INTO station (station_name, location, contact_information) VALUES ('Saphan Kwai', 'Bangkok', '222');
+--INSERT INTO station (station_name, location, contact_information) VALUES ('Ari', 'Bangkok', '333');
+--INSERT INTO station (station_name, location, contact_information) VALUES ('Siam', 'Bangkok', '444');
+--INSERT INTO station (station_name, location, contact_information) VALUES ('Victory Monument', 'Bangkok', '555');
+
 CREATE TABLE train (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     train_number VARCHAR(50) NOT NULL,

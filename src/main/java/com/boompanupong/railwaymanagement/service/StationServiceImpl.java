@@ -28,7 +28,21 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Station createStation(Station station) {
-        System.out.println("Station Saved");
         return stationRepository.save(station);
+    }
+
+    @Override
+    public Station updateStation(Station station) {
+        Optional<Station> optionalStation = stationRepository.findById(station.getId());
+        Station stationToUpdate = optionalStation.orElseThrow(() -> new NotFoundException("Station Not Found"));
+        stationToUpdate.setStationName(station.getStationName());
+        stationToUpdate.setLocation(station.getLocation());
+        stationToUpdate.setContactInformation(station.getContactInformation());
+        return stationRepository.save(stationToUpdate);
+    }
+
+    @Override
+    public void deleteStationById(Long id) {
+        stationRepository.deleteById(id);
     }
 }
