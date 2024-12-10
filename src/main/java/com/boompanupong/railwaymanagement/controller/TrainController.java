@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/train")
+@RequestMapping("/railwaymanager/train")
 public class TrainController {
 
     @Autowired
