@@ -1,7 +1,9 @@
 package com.boompanupong.railwaymanagement.service;
 
 import com.boompanupong.railwaymanagement.exception.NotFoundException;
+import com.boompanupong.railwaymanagement.model.Station;
 import com.boompanupong.railwaymanagement.model.Train;
+import com.boompanupong.railwaymanagement.model.dto.TrainDto;
 import com.boompanupong.railwaymanagement.repository.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ public class TrainServiceImpl implements TrainService {
 
     @Autowired
     private TrainRepository trainRepository;
+    @Autowired
+    private StationService stationService;
 
     @Override
     public List<Train> getAllTrain() {
@@ -28,22 +32,39 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public Train createTrain(Train train) {
+    public Train createTrain(TrainDto trainDto) {
+        Station originStation = stationService.getStationById(trainDto.getOriginStationId());
+        Station destinationStation = stationService.getStationById(trainDto.getDestinationStationId());
+
+        Train train = new Train();
+        train.setTrainNumber(trainDto.getTrainNumber());
+        train.setDepartureTime(trainDto.getDepartureTime());
+        train.setArrivalTime(trainDto.getArrivalTime());
+        train.setOriginStation(originStation);
+        train.setDestinationStation(destinationStation);
+        train.setSeatCapacity(trainDto.getSeatCapacity());
+        train.setTicketPrice(trainDto.getTicketPrice());
+
         return trainRepository.save(train);
     }
 
     @Override
-    public Train updateTrain(Train train) {
-        Optional<Train> optionalTrain = trainRepository.findById(train.getId());
+    public Train updateTrain(TrainDto trainDto) {
+        Optional<Train> optionalTrain = trainRepository.findById(trainDto.getId());
         Train trainToUpdate = optionalTrain.orElseThrow(() ->
-                new NotFoundException("Train ID: " + train.getId() + " Not Found"));
-        trainToUpdate.setTrainNumber(train.getTrainNumber());
-        trainToUpdate.setDepartureTime(train.getDepartureTime());
-        trainToUpdate.setArrivalTime(train.getArrivalTime());
-        trainToUpdate.setOriginStation(train.getOriginStation());
-        trainToUpdate.setDestinationStation(train.getDestinationStation());
-        trainToUpdate.setSeatCapacity(train.getSeatCapacity());
-        trainToUpdate.setTicketPrice(train.getTicketPrice());
+                new NotFoundException("Train ID: " + trainDto.getId() + " Not Found"));
+
+        Station newOriginStation = stationService.getStationById(trainDto.getOriginStationId());
+        Station newDestinationStation = stationService.getStationById(trainDto.getDestinationStationId());
+
+        trainToUpdate.setTrainNumber(trainDto.getTrainNumber());
+        trainToUpdate.setDepartureTime(trainDto.getDepartureTime());
+        trainToUpdate.setArrivalTime(trainDto.getArrivalTime());
+        trainToUpdate.setOriginStation(newOriginStation);
+        trainToUpdate.setDestinationStation(newDestinationStation);
+        trainToUpdate.setSeatCapacity(trainDto.getSeatCapacity());
+        trainToUpdate.setTicketPrice(trainDto.getTicketPrice());
+
         return trainRepository.save(trainToUpdate);
     }
 
