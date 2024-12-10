@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TrainService {
     List<Train> getAllTrain();
-    Train getTrainById();
-    Train createTrain();
+    Train getTrainById(Long id);
+    Train createTrain(Train train);
+    Train updateTrain(Train train);
+    void deleteTrainById(Long id);
 }

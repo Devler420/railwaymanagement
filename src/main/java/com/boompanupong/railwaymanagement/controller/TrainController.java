@@ -1,9 +1,47 @@
 package com.boompanupong.railwaymanagement.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.boompanupong.railwaymanagement.model.Train;
+import com.boompanupong.railwaymanagement.service.TrainService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/train")
 public class TrainController {
+
+    @Autowired
+    private TrainService trainService;
+
+    @GetMapping
+    public ResponseEntity<List<Train>> getAllTrain() {
+        List<Train> response = trainService.getAllTrain();
+        return response.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Train> getTrainById(@PathVariable Long id) {
+        Train response = trainService.getTrainById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<Train> createTrain(@RequestBody Train train) {
+        Train savedTrain = trainService.createTrain(train);
+        return new ResponseEntity<>(savedTrain, HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<Train> updateTrain(@RequestBody Train train) {
+        Train updateTrain = trainService.updateTrain(train);
+        return new ResponseEntity<>(updateTrain, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTrainById(@PathVariable Long id) {
+        trainService.deleteTrainById(id);
+    }
 }
