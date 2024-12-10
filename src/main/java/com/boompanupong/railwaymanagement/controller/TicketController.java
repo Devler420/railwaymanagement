@@ -1,6 +1,7 @@
 package com.boompanupong.railwaymanagement.controller;
 
 import com.boompanupong.railwaymanagement.model.Ticket;
+import com.boompanupong.railwaymanagement.model.dto.TicketDto;
 import com.boompanupong.railwaymanagement.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,14 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-        Ticket savedTicket = ticketService.createTicket(ticket);
+    public ResponseEntity<Ticket> createTicket(@RequestBody TicketDto ticketDto) {
+        Ticket savedTicket = ticketService.createTicket(ticketDto);
         return new ResponseEntity<>(savedTicket, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket) {
-        Ticket updateTicket = ticketService.updateTicket(ticket);
+    public ResponseEntity<Ticket> updateTicket(@RequestBody TicketDto ticketDto) {
+        Ticket updateTicket = ticketService.updateTicket(ticketDto);
         return new ResponseEntity<>(updateTicket, HttpStatus.ACCEPTED);
     }
 
